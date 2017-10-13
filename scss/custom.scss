@@ -1,0 +1,249 @@
+//RESET
+@import "reset";
+//COLORS
+@import 'colors';
+//MATERIAL RESET
+@import 'material-reset';
+
+/* CUSTOM STYLES */
+.main-background {
+	background: url('../images/bg-01.jpg') no-repeat right 60px fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.font-handw {
+	font-family: 'Permanent Marker', cursive;
+}
+
+.main {
+	width: 100%;
+	height: 100vh;
+}
+
+body {
+	background: $white;
+}
+
+nav {
+	background: $twitter;
+	box-shadow: none;
+	//padding-top: $s;
+
+	a, a.brand-logo {
+		//color: $twitter;
+		text-shadow:none;
+	}
+
+	a.brand-logo {
+		@extend .font-handw;
+		//font-size: 3em;
+	}
+}
+
+main {
+
+	.btn-start {display: block;}
+	.btn-stop {display: none;}
+
+	height: calc(100vh - 65px);
+	padding-top: $m+10;
+
+	input.term-input {
+		font-size: 1.5em !important;
+	}
+
+	.container {
+		padding-left: .75rem;
+		padding-right: .75rem;
+		background-color: $white;
+		padding-bottom: 5px;
+		border-radius: border;
+	}
+
+	.title {
+		font-size: 1.5em;
+		font-weight: $fw-bold;
+		padding: .75rem;
+		color: $primary;
+		margin-bottom: 0;
+		margin-top: 0;
+
+		span {
+			color: $l-secondary;
+			background-color: rgba($l-gray,0.5);
+			border-radius: 3px;
+			padding-left: .5rem;
+			padding-right: .5rem;
+		}
+
+	}
+
+	.stats {
+
+		p {
+			padding: .75rem;
+			span {
+				font-size: 1.5em;
+				font-weight: $fw-bold;
+				color: lighten($l-primary,15%);
+				&:hover {
+					cursor: pointer;
+				}
+				&:before {
+					display: inline;
+					content: "\f112";
+					font-family: "Fontawesome";
+					color: $l-primary;
+					width: 30px;
+					height: 30px;
+					position: relative;
+					font-size: 1em;
+					margin-right: 2px;
+				}
+			}
+		}
+
+	}
+
+	.answersBox {
+
+		height: calc(100vh - 385px);
+		overflow: hidden;
+		overflow-y: auto;
+		padding-bottom: 0 !important;
+		margin-top: 0 !important;
+		padding-top: 0  !important;
+
+		ul {
+
+			li {
+
+				padding: $s;
+
+				&:nth-child(2n-1) {
+					background: rgba($black,0.07);
+				}
+
+				// TO DO --> Answer Template
+				/*
+				.user-img {
+					border-radius: 50%;
+					float: left;
+					width:48px;
+					height: 48px;
+					overflow: hidden;
+				}
+
+				.user-info {
+					width: calc(100% - 58px);
+					margin-left: 10px;
+					float: left;
+					display: inline-block;
+					font-size: 1em;
+
+					h4 {font-size: 1em;color: $d-gray;margin-top: 0;}
+
+					.user-name {font-weight: $fw-bold;color: $primary;}
+
+					.user-handle {}
+
+					.tw-time {color: darken($l-gray,20%);}
+
+					.tw-content {}
+
+				}
+				*/
+
+			}
+
+		}
+
+	}
+
+	&.streaming {
+
+		.btn-start {display: none;}
+		.btn-stop {display: block;}
+
+	}
+
+}
+
+//TOAST CUSTOMIZE
+.response-msg {
+
+	color: $white;
+	background-color: lighten($l-primary,15%);
+	padding: .48rem .75rem;
+	font-weight: $fw-bold;
+
+	&.error {
+		background-color: $warning;
+	}
+
+	&.success {
+		background-color: lighten($l-secondary,12%);
+	}
+
+	&.stop {
+	}
+
+}
+
+/* END CUSTOM STYLES */
+
+
+/* MEDIA QUERIES */
+
+/*w 1140*/
+@media (max-width: 71.25em) {
+
+}
+
+/*w 992*/
+@media (max-width: 62em) {
+
+}
+
+/*w 900*/
+@media (max-width: 56.25em) {
+
+}
+
+/*w 800*/
+@media (max-width: 50em) {
+
+}
+
+/*w 768*/
+@media (max-width: 48em) {
+
+}
+
+/*w 640*/
+@media (max-width: 40em) {
+
+}
+
+/*w 600*/
+@media (max-width: 37.5em) {
+
+}
+
+/*w 540*/
+@media (max-width: 33.75em) {
+
+}
+
+/*w 480*/
+@media (max-width: 30em) {
+
+}
+
+/*w 380*/
+@media (max-width: 23.75em) {
+
+}
