@@ -6,20 +6,6 @@ socket.on("connect", function(msg){
 
 });
 
-socket.on("response", function(newResp){
-
-  console.log(newResp);
-
-  var datosUrl = newResp.datos;
-  var metaDatosUrl = newResp.metadatos;
-
-  $('#responseList').prepend(datosUrl);
-
-  //STATS
-  stats();
-
-});
-
 // START <> STOP Streaming
 // TO DO --> Add key press font intro on search!!!
 $('#start-btn').click(function(){
@@ -27,9 +13,12 @@ $('#start-btn').click(function(){
 	var search = $('#input-url').val(); // <-- Get input value
 	// TO DO --> SEND INPUT VALUE
 
+	var getURL = urlCall;
+
 	/*
 	if(search!=""){
 
+		getURL = search;
 		cleanRespList(); // <-- Clean responseList
 		$('main').addClass('searching'); // CHANGE STYLE TO STOP STREAMING
 		$('#search').show();
@@ -39,13 +28,50 @@ $('#start-btn').click(function(){
 
 	} else {
 
-		responseMsg("empty");
+		//responseMsg("empty");
+		gerURL = urlCall
 
 	}
 	*/
-	socket.emit('start',urlCall);
+	
+	socket.emit('start',getURL); // Send URL to server for API Call
 
 });
+
+socket.on("response", function(newResp){
+
+  //console.log(newResp);
+
+  printAnswer(newResp);
+
+  stats();
+
+});
+
+//PRINT CALL ANSWER
+function printAnswer(data){
+
+	cleanRespList();
+	
+	//TO DO --> Answer template
+	console.log(data);
+	var responseTemplate = data;
+	/*
+	var responseTemplate = '<li>'+
+	'<p><b>Datos </b><br>'+data+'</p>'
+	'<p>URL Meta Datos '+metadata+'</p>'+
+	'<p>'+info+'</p>'+
+	'</li>';
+	*/
+
+	//$('#responseList').prepend(responseTemplate);
+}
+
+//API Call
+// var urlCall = "https://opendata.aemet.es/opendata/api/"+searchItems+"?api_key";
+var urlCall = "https://opendata.aemet.es/opendata/api/valores/climatologicos/inventarioestaciones/todasestaciones/?api_key=";
+var urlCall = "https://opendata.aemet.es/opendata/api/prediccion/especifica/playa/1500401/?api_key=";
+
 
 $('#stop-btn').click(function(){
 	$('#search').val("");
@@ -102,6 +128,3 @@ function cleanRespList() {
 	//Refresh ul tweetList
 	$('#responseList').html("");
 };
-
-//API Call
-var urlCall = "https://opendata.aemet.es/opendata/api/valores/climatologicos/inventarioestaciones/todasestaciones/?api_key=";

@@ -49,6 +49,8 @@ io.on('connection', function(socket){
   //URL SEARCH from front
   socket.on('start',function(data){
 
+    console.log("CALLING AEMET",data);
+
     var apiKey = config.service.apiKey;
     var url = data;
 
@@ -65,11 +67,35 @@ io.on('connection', function(socket){
       //if (error) throw new Error(error);
       if(error) {
         console.log("e",error);
+        var e = "ERROR";
+        socket.emit("response",e);
       };
       //console.log("r",response);
-      console.log("b",body);
-      socket.emit("response",JSON.parse(body));
+      //console.log("b",body);
+      getRealData(JSON.parse(body));
     });
+
+    function getRealData(data) {
+
+      var options = {
+        method: 'GET',
+        "rejectUnauthorized": false,
+        url: data.datos,
+        headers: 
+         { 'cache-control': 'no-cache' }
+      };
+
+      request(options, function (error, response, body) {
+        //if (error) throw new Error(error);
+        if(error) {
+          console.log("e",error);
+        };
+        //console.log("r",response);
+        console.log("b",body);
+        socket.emit("response",JSON.parse(body));
+      });
+       
+      }
 
   });
 
