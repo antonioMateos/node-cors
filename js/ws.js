@@ -8,13 +8,12 @@ socket.on("connect", function(msg){
 
 socket.on("response", function(newResp){
 
-  var data = newResp;
-  console.log(data);
+  console.log(newResp);
 
-  /* Answer TEMPLATE */
-  var response = data;
+  var datosUrl = newResp.datos;
+  var metaDatosUrl = newResp.metadatos;
 
-  $('#responseList').prepend(tweet);
+  $('#responseList').prepend(datosUrl);
 
   //STATS
   stats();
@@ -26,8 +25,9 @@ socket.on("response", function(newResp){
 $('#start-btn').click(function(){
 
 	var search = $('#input-url').val(); // <-- Get input value
-	// TO DO --> Fix text for correct search
+	// TO DO --> SEND INPUT VALUE
 
+	/*
 	if(search!=""){
 
 		cleanRespList(); // <-- Clean responseList
@@ -42,6 +42,8 @@ $('#start-btn').click(function(){
 		responseMsg("empty");
 
 	}
+	*/
+	socket.emit('start',urlCall);
 
 });
 
@@ -100,3 +102,6 @@ function cleanRespList() {
 	//Refresh ul tweetList
 	$('#responseList').html("");
 };
+
+//API Call
+var urlCall = "https://opendata.aemet.es/opendata/api/valores/climatologicos/inventarioestaciones/todasestaciones/?api_key=";

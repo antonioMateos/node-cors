@@ -4,7 +4,9 @@ var express = require('express'),
 	path    = require('path'),
 	http	= require('http').Server(app),
   io = require("socket.io")(http), // app or http
-	bodyParser = require('body-parser');
+	bodyParser = require('body-parser'),
+  request = require('request')
+  //(methodOverride = require("method-override");
 
 console.log('- - - - Iniciando entorno');
 // CORS --> Cabeceras correctas
@@ -17,6 +19,7 @@ app.use(function(req, res, next) {
 // Parsers --> Poder mandar y recibir JSON
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+//app.use(methodOverride());
 
 console.log('- - - - Middlewares cargados...');
 
@@ -46,8 +49,27 @@ io.on('connection', function(socket){
   //URL SEARCH from front
   socket.on('start',function(data){
 
+    var apiKey = config.service.apiKey;
     var url = data;
-    //console.log(url);
+
+    var options = {
+      method: 'GET',
+      "rejectUnauthorized": false,
+      url: data,
+      qs: { 'api_key': apiKey },
+      headers: 
+       { 'cache-control': 'no-cache' }
+    };
+
+    request(options, function (error, response, body) {
+      //if (error) throw new Error(error);
+      if(error) {
+        console.log("e",error);
+      };
+      //console.log("r",response);
+      console.log("b",body);
+      socket.emit("response",JSON.parse(body));
+    });
 
   });
 
