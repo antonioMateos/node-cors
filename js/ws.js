@@ -51,7 +51,7 @@ socket.on("response", function(newResp){
 //PRINT CALL ANSWER
 function printAnswer(data){
 
-	//cleanRespList();
+	cleanRespBox(); // <-- Clean response box at the begininng
 	
 	//TO DO --> Answer template
 	console.log(data);
@@ -125,7 +125,7 @@ function responseMsg(response) {
 }
 
 // REFRESH Tw List
-function cleanRespList() {
+function cleanRespBox() {
 	//Refresh ul tweetList
 	$('#response p').html("");
 };
