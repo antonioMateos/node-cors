@@ -24,7 +24,6 @@ app.use(bodyParser.json());
 console.log('- - - - Middlewares cargados...');
 
 console.log('- - - - FRONT ROUTES');
-
 app.use(express.static(__dirname + '/'));
 
 app.get('/', function (request, response, next) {
@@ -91,7 +90,7 @@ io.on('connection', function(socket){
           console.log("e",error);
         };
         //console.log("r",response);
-        console.log("b",body);
+        //console.log("b",body);
         socket.emit("response",JSON.parse(body));
       });
        
@@ -100,9 +99,11 @@ io.on('connection', function(socket){
   });
 
   //STOP STREAMING
+  /*
   socket.on('stop',function(){
     console.log("- - - - STOP Streaming - - - -");
   });
+*/
   
   // STANDARD SOCKETS
   /*

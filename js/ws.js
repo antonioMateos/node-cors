@@ -51,7 +51,7 @@ socket.on("response", function(newResp){
 //PRINT CALL ANSWER
 function printAnswer(data){
 
-	cleanRespList();
+	//cleanRespList();
 	
 	//TO DO --> Answer template
 	console.log(data);
@@ -64,12 +64,13 @@ function printAnswer(data){
 	'</li>';
 	*/
 
-	//$('#responseList').prepend(responseTemplate);
+	//$('#response').prepend(responseTemplate);
+	$('#response p').prepend('<span class="answer">'+JSON.stringify(responseTemplate)+"</span>"); // FOR PROTOTYPE PURPOSES ONLY
 }
 
 //API Call
 // var urlCall = "https://opendata.aemet.es/opendata/api/"+searchItems+"?api_key";
-var urlCall = "https://opendata.aemet.es/opendata/api/valores/climatologicos/inventarioestaciones/todasestaciones/?api_key=";
+//var urlCall = "https://opendata.aemet.es/opendata/api/valores/climatologicos/inventarioestaciones/todasestaciones/?api_key=";
 var urlCall = "https://opendata.aemet.es/opendata/api/prediccion/especifica/playa/1500401/?api_key=";
 
 
@@ -126,5 +127,5 @@ function responseMsg(response) {
 // REFRESH Tw List
 function cleanRespList() {
 	//Refresh ul tweetList
-	$('#responseList').html("");
+	$('#response p').html("");
 };
