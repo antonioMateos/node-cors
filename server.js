@@ -71,7 +71,7 @@ io.on('connection', function(socket){
       };
       //console.log("r",response);
       //console.log("b",body);
-      getRealData(JSON.parse(body));
+      getRealData(JSON.parse(body)); // With AEMET API we need a second ajax call because its response gives you the correct url to get the DATA
     });
 
     function getRealData(data) {
