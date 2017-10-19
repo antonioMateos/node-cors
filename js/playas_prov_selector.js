@@ -12,23 +12,36 @@ function provincias(i) {
 console.info("LOCALIDADES - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
 var localidad = document.querySelectorAll("#datos_selector optgroup");
 
+var ddbb = {};
+
 for(i=0;i<=localidad.length-1;i++){
 	localidades(i);
 }
 
 function localidades(i) {
-	// LABEL --> localidad[i].attributes["0"].textContent
+
 	var ciudad = localidad[i].attributes["0"].textContent;
-	// PLAYAS
-	printPlayas(ciudad);
+	//ciudad = ciudad.toLowerCase();
+
+	// ADD CIUDADES
+	if(ddbb[ciudad] === undefined){
+		ddbb[ciudad] = [];
+		//ddbb.ciudad
+	}
+	/* FOR PROTO ONLY
+	if(i>=localidad.length-1){
+		console.log("DDBB",ddbb);
+	}
+	*/
+	getPlayas(ciudad);
 }
 
 var playas = document.querySelectorAll("#datos_selector optgroup option");
 
-function printPlayas(city) {
+function getPlayas(city) {
 
 	var obj = playas;
-	//console.log(city);
+	console.log("Beaches IN",city);
 
 	for (var prop in obj) {
 
@@ -40,14 +53,23 @@ function printPlayas(city) {
 
 			if(parent === city){
 
+				var b_key = obj[prop].text;
+
 				var itemID = obj[prop].value;
 					var indx = itemID.lastIndexOf("-");
 					var lngth = itemID.length;
 					itemID = itemID.slice(indx+1);
 
-				//console.log("> "+obj[prop].text,":",itemID);
-				var key = obj[prop].text;
-				var id = itemID;
+				var beach = {
+					name : b_key,
+					id : itemID
+				};
+
+				var arr = ddbb[city];
+
+				arr.push(beach);
+				console.log(">",arr);
+
 			}
 		}
 
@@ -55,19 +77,40 @@ function printPlayas(city) {
 
 }
 
-// -> playa[1].text;
-// -> playa[1].value; // VALUE --> TO DO --> Slice para quitar nombre de playa y quedarme solo con la ID
+// BASIC STRUCTURE WANTED!
+/*
+	ddbb = {
 
-// BASIC OBJECT
-var ddbb = {
-	provincia_key : {
-		id : id,			// <-- ID 15 p.e.
-		newPlaya :{ 		// <-- Ares p.e.
-			id : id, 		// <-- 15004
-			loc : [x,y] 	// <-- Coordenates --> TO DO --> Ajax Call to get them
+		provincia01 : {
+			id : NN,
+			ciudad01 : {
+				playa01 : {
+					nombre : nombrePlaya,
+					id : idPlaya
+				}
+				playa02 : {
+					nombre : nombrePlaya,
+					id : idPlaya
+				}
+			}
+			ciudad02 : {
+				playa01 : {
+					nombre : nombrePlaya,
+					id : idPlaya
+				}
+				playa02 : {
+					nombre : nombrePlaya,
+					id : idPlaya
+				}
+			}
 		}
+
 	}
-}
+
+	Playa -> ddbb.provincia01.ciudad01.playa01.nombre
+	ID 	 -> ddbb.provincia01.ciudad01.playa01.id
+
+*/
 
 // HOW TO -> Add elements to an object 
 // var object = {}
