@@ -41,10 +41,12 @@ io.on('connection', function(socket){
             json.provincia = provincia;
             json.id = id;
             */
-            var obj = {};
-            obj[provincia] = id;
-            respArr.push(obj);
-            console.log("DATA SCRPD:",data.html(),data.attr('value'));
+            if(provincia!=="...") {
+              var obj = {};
+              obj[provincia] = id;
+              respArr.push(obj);
+              console.log("DATA SCRPD:",data.html(),data.attr('value'));
+            }
 
           })
 
