@@ -5,7 +5,7 @@ var express = require('express'),
 	http	= require('http').Server(app),
   io = require("socket.io")(http), // app or http
 	bodyParser = require('body-parser'),
-  request = require('request')
+  request = require('request') // AJAX CORS
   //(methodOverride = require("method-override");
 
 console.log('- - - - Iniciando entorno');
